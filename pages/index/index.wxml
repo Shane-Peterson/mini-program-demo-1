@@ -1,23 +1,22 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-      <open-data type="userNickName"></open-data>
-    </block>
-    <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
-    </block>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class="body">
+    <view wx:if="{{visible}}">
+        <button bindtap="start">开始游戏</button>
+    </view>
+    <view wx:else>
+        <view class="circle">{{displaySecretNum}}</view>
+        <view class="result">
+            <text wx:if="{{tip === 'big'}}">猜大了</text>
+            <text wx:elif="{{ tip === 'small'}}">猜小了</text>
+            <text wx:elif="{{ tip === 'equal'}}">猜对了</text>
+            <text wx:else></text>
+        </view>
+        <view class="numbers">
+            <picker class="number" bindchange="setNum" value="{{num}}" range="{{numArray}}">
+                <view class="picker">
+                    <text>开始猜数字: {{numArray[num]}}</text>
+                </view>
+            </picker>
+            <button bindtap="guess" size="mini">确定</button>
+        </view>
+    </view>
 </view>
