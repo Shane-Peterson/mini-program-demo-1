@@ -28,7 +28,6 @@ Page({
     } else {
       this.setData({tip: 'equal'})
       this.setData({displaySecretNum: this.data.secretNum})
-      console.log(this);
       wx.showModal({
         title: '提示',
         content: '要不要再来一局？',
